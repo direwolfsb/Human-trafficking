@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Style Gallery with Page Turn Effect</title>
+    
+    <!-- Updated CSS path -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/preview.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="menu-toggle">
+            <img src="{{ url_for('static', filename='images/menu.svg') }}" alt="Menu" class="menu-icon">
+        </div>
+        <div class="right-side">
+            <div class="chat">
+                <!-- Updated internal link to use Flask route -->
+                <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/message-circle.svg') }}" alt="Chat" class="chat-icon"></a>
+            </div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='images/user.svg') }}" alt="Profile" class="profile-icon">
+            </div>
+        </div>
+    </div>
+    <div class="gallery-container">
+        <button id="prevBtn" class="control-btn">
+            <img src="{{ url_for('static', filename='images/arrow-left.svg') }}" alt="Previous">
+        </button>
+        <div class="gallery" id="gallery">
+        </div>
+        <button id="nextBtn" class="control-btn">
+            <img src="{{ url_for('static', filename='images/arrow-right.svg') }}" alt="Next">
+        </button>
+    </div>
+
+    <!-- Updated JS path -->
+    <script src="{{ url_for('static', filename='scripts/preview.js') }}"></script>
+</body>
+</html>

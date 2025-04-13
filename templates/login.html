@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Login - Human Trafficking Awareness</title>
+  <link rel="stylesheet" href="../src/styles/main.css" />
+  <link rel="stylesheet" href="../src/styles/login.css" />
+  <!-- D3 and Topojson for the map -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+</head>
+<body>
+  <!-- Fullscreen container -->
+  <div class="fullscreen-map">
+    <!-- Map element -->
+    <div id="trafficking-map"></div>
+  </div>
+
+  <!-- Centered login container -->
+  <div class="login-form-centered">
+    <div class="login-card">
+      <div class="login-header">
+        <h2>Welcome Back</h2>
+        <p>Login to continue your journey</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
+        <button type="submit" class="login-button">Login</button>
+        <div class="login-footer">
+          <a href="#">Forgot password?</a>
+          <span>Don't have an account? <a href="#">Sign up</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Emergency button (optional) -->
+  <div class="emergency-button-login">
+    <a href="https://humantraffickinghotline.org/en" class="emergency-circle-login">
+      <img src="../src/images/alert-triangle.svg" alt="Emergency" class="emergency-icon-login" />
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../src/scripts/login.js"></script>
+  <script src="../src/scripts/trafficking-map.js"></script>
+</body>
+</html>

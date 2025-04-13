@@ -1,0 +1,759 @@
+$sidebarBackgroundColor: #1D1E20;
+$contentBackgroundColor: #1D1E20;
+$textColor: #F9F8F6;
+$textareaBorderColor: #2D2E30;
+$purpleAccent: #9C27B0;
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../assets/fonts/Inter-Variable.ttf);
+}
+
+// Font classes
+.ibm-plex-mono {
+    &-thin {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 100;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 100;
+            font-style: italic;
+        }
+    }
+    
+    &-extralight {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 200;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 200;
+            font-style: italic;
+        }
+    }
+    
+    &-light {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 300;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 300;
+            font-style: italic;
+        }
+    }
+    
+    &-regular {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 400;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 400;
+            font-style: italic;
+        }
+    }
+    
+    &-medium {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 500;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 500;
+            font-style: italic;
+        }
+    }
+    
+    &-semibold {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 600;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 600;
+            font-style: italic;
+        }
+    }
+    
+    &-bold {
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 700;
+        font-style: normal;
+        
+        &-italic {
+            font-family: "IBM Plex Mono", serif;
+            font-weight: 700;
+            font-style: italic;
+        }
+    }
+}
+  
+html, body {
+    font-family: "IBM Plex Mono", serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+img {
+    filter: invert(100%) sepia(0%) saturate(7423%) hue-rotate(159deg) brightness(119%) contrast(103%);
+}
+
+body {
+    background-color: $contentBackgroundColor;
+    color: $textColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.1;
+        background-image: radial-gradient($textColor 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+}
+
+// Scrollbars
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    
+    &-track {
+        background: #1D1E20;
+        border-radius: 10px;
+    }
+    
+    &-thumb {
+        background: #2D2E30;
+        border-radius: 10px;
+        
+        &:hover {
+            background: #3D3E40;
+        }
+    }
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #2D2E30 #1D1E20;
+}
+
+// Top Bar
+.top-bar {
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    .menu-toggle {
+        margin-top: 10px;
+        margin-left: 10px;
+        cursor: pointer;
+        
+        .menu-icon {
+            margin-left: 10px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+    
+    .right-side {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        
+        .temporary, .preview, .profile {
+            margin-right: 30px;
+            cursor: pointer;
+            
+            .not-temporary-icon, .preview-icon, .profile-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .emergency-help {
+            margin-right: 30px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .emergency-help a {
+            display: block;
+        }
+
+        .emergency-icon {
+            width: 30px;
+            height: 30px;
+            filter: invert(37%) sepia(88%) saturate(7117%) hue-rotate(352deg) brightness(94%) contrast(128%);
+            animation: pulse 2s infinite;
+        }
+
+        .emergency-help::before {
+            content: "Emergency";
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #ff3e3e;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        .emergency-help:hover::before {
+            opacity: 1;
+        }
+    }
+}
+
+// Backdrop
+.backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.active {
+        display: block;
+        opacity: 1;
+    }
+}
+
+// Sidebar
+.sidebar {
+    background-color: $sidebarBackgroundColor;
+    width: 50%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    justify-content: space-between;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999;
+    visibility: hidden;
+
+    &.active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .top-side {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+        .newChat {
+            width: 25px;
+            height: 25px;
+            margin-top: 30px;
+            cursor: pointer;
+            filter: invert(100%) sepia(0%) saturate(7423%) hue-rotate(159deg) brightness(119%) contrast(103%);
+        }
+    }
+
+    .chat-list {
+        flex-grow: 1;
+        overflow-y: auto;
+        margin: 20px 5px 0;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            
+            &-track {
+                background: #1D1E20;
+            }
+            
+            &-thumb {
+                background: #2D2E30;
+            }
+        }
+
+        .chat-item {
+            width: calc(100% - 15px);
+            padding: 15px 0 15px 15px;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            &.active {
+                background-color: rgba(255, 255, 255, 0.15);
+            }
+            
+            &.temp-chat {
+                background: linear-gradient(to right, rgba(74, 20, 140, 0.2), transparent);
+                border-left: 3px solid $purpleAccent;
+            }
+
+            .chat-name {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .last-message {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.5);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+// Content & Chat Container
+.content {
+    height: 100vh;
+    width: 60%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat-container {
+    margin: 60px auto 0;
+    font-size: 0.95em;
+    width: 100%;
+    padding: 0 20px 0 0;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    height: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    &::-webkit-scrollbar {
+        width: 8px;
+        
+        &-track {
+            background: #1D1E20;
+        }
+        
+        &-thumb {
+            background: #2D2E30;
+        }
+    }
+    
+    .message {
+        padding: 8px 18px;
+        border-radius: 20px;
+        max-width: 70%;
+        word-wrap: break-word;
+        
+        &.received {
+            align-self: flex-start;
+            max-width: 100%;
+            background-color: rgba($contentBackgroundColor, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            
+            &after {
+                content: '|';
+                display: inline-block;
+                animation: blink 1s infinite;
+                opacity: 0;
+            }
+            
+            &.temp-message {
+                background-color: rgba($contentBackgroundColor, 0.8) !important;
+            }
+        }
+        
+        &.sent {
+            background-color: $textareaBorderColor;
+            color: $textColor;
+            align-self: flex-end;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        &.system {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #FFB300;
+            text-align: center;
+            font-style: italic;
+            padding: 8px 12px;
+            margin: 10px auto;
+            max-width: 80%;
+            border-radius: 8px;
+            
+            &.temp-message {
+                background-color: rgba(156, 39, 176, 0.2);
+                color: #CE93D8;
+                border: 1px solid $purpleAccent;
+            }
+        }
+        
+        &.temp-message {
+            position: relative;
+            border: 1px solid $purpleAccent !important;
+            background-color: $textareaBorderColor !important;
+            box-shadow: 0 0 8px $purpleAccent;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                border-radius: inherit;
+                background: linear-gradient(45deg, $purpleAccent, rgba(156, 39, 176, 0.1), $purpleAccent);
+                background-size: 400% 400%;
+                animation: tempGradient 3s ease infinite;
+                z-index: -1;
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+// Message Box
+.message-box {
+    width: 100%;
+    min-height: 60px; // Set a reasonable minimum height
+    max-height: 200px; // Keep the maximum height
+    padding: 10px 0 10px 20px; // Reduce padding to prevent excessive growth
+    margin-bottom: 20px;
+    border-radius: 50px;
+    color: $textColor;
+    font-size: 15px;
+    resize: none;
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center; // Changed to center for better vertical alignment
+    gap: 10px;
+    background-color: $contentBackgroundColor;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease; // Add smooth transition for height changes
+
+    textarea {
+        flex-grow: 1;
+        min-height: 24px;
+        max-height: 100px; // Reduced from 150px to prevent excessive growth
+        padding: 10px 20px 10px 0; // Add padding at the bottom
+        border: none;
+        color: $textColor;
+        font-size: 14px;
+        resize: none;
+        outline: none;
+        background-color: transparent;
+        letter-spacing: 0.3px;
+        font-weight: 300;
+        transition: all 0.2s ease;
+        overflow-y: auto; // Enable scrolling for long content
+        line-height: 1.5;
+        width: calc(100% - 40px); // Ensure proper width with padding
+    }
+
+    .send {
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #7c7c7c;
+        filter: none;
+        cursor: pointer;
+        align-self: center; // Ensure it stays centered
+        flex-shrink: 0; // Prevent the send button from shrinking
+        position: relative; // Remove sticky positioning
+        transition: all 0.2s ease;
+        opacity: 0.7;
+        width: 20px; // Set explicit width
+        height: 20px; // Set explicit height
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+        transition: width 0.3s ease, left 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    &:focus-within {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        
+        &::before {
+            left: 25%;
+            width: 50%;
+        }
+    }
+    
+    &.temp-message-box {
+        border: 1px solid $purpleAccent !important;
+        background-color: $contentBackgroundColor !important;
+        box-shadow: 0 0 10px $purpleAccent;
+        animation: pulseBorder 2s infinite;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: inherit;
+            border: 1px solid $purpleAccent;
+            z-index: -1;
+            animation: pulseOutline 2s infinite;
+            pointer-events: none;
+        }
+    }
+}
+
+// Temporary Mode Effects
+.lightning-effect {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px $purpleAccent;
+    transition: all 0.3s ease;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid $purpleAccent;
+        border-radius: 8px;
+        animation: lightning 1.5s infinite alternate;
+        pointer-events: none;
+    }
+}
+
+.temp-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $purpleAccent;
+    font-size: 16px;
+    animation: flash 1.5s infinite;
+}
+
+.temporary-active {
+    filter: invert(24%) sepia(67%) saturate(5633%) hue-rotate(285deg) brightness(95%) contrast(106%) !important;
+}
+
+// Emergency button styling - modern redesign
+.emergency-button {
+  position: fixed; // Fixed position so it's always accessible
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000; // Ensure it stays above other elements
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .emergency-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff3e3e, #ff0000);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3), 
+                0 0 0 rgba(255, 0, 0, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: breathe 3s infinite ease-in-out;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4),
+                  0 0 25px rgba(255, 0, 0, 0.2),
+                  inset 0 0 15px rgba(255, 255, 255, 0.4);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+    
+    .emergency-icon {
+      width: 30px;
+      height: 30px;
+      filter: brightness(0) invert(1); // Make it white
+    }
+  }
+  
+  .emergency-label {
+    margin-top: 8px;
+    color: #ff3e3e;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  
+  &:hover .emergency-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Animations
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes tempGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes lightning {
+    0% {
+        box-shadow: 0 0 5px $purpleAccent, 0 0 10px $purpleAccent;
+        opacity: 0.3;
+    }
+    100% {
+        box-shadow: 0 0 20px $purpleAccent, 0 0 35px $purpleAccent;
+        opacity: 0.7;
+    }
+}
+
+@keyframes pulseOutline {
+    0% { 
+        border-color: rgba(156, 39, 176, 0.5);
+        box-shadow: 0 0 5px $purpleAccent; 
+    }
+    50% { 
+        border-color: rgba(156, 39, 176, 1);
+        box-shadow: 0 0 15px $purpleAccent, 0 0 20px $purpleAccent; 
+    }
+    100% { 
+        border-color: rgba(156, 39, 176, 0.5);
+        box-shadow: 0 0 5px $purpleAccent; 
+    }
+}
+
+@keyframes pulseBorder {
+    0% { box-shadow: 0 0 5px $purpleAccent; }
+    50% { box-shadow: 0 0 15px $purpleAccent, 0 0 20px $purpleAccent; }
+    100% { box-shadow: 0 0 5px $purpleAccent; }
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+}
+
+@keyframes fadeInPlaceholder {
+    0% { opacity: 0; transform: translateY(5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// Add new keyframes for the breathe animation
+@keyframes breathe {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3),
+                0 0 0 rgba(255, 0, 0, 0);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 0, 0, 0.5),
+                0 0 30px rgba(255, 0, 0, 0.3);
+  }
+}

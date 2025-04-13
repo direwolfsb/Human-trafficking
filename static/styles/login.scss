@@ -1,0 +1,507 @@
+// Variables
+$purpleAccent: #9c27b0;
+$purpleAccentDark: #673ab7;
+$purpleLight: #ba68c8;
+$backgroundDark: #141517;
+$cardBackground: #1D1E20;
+$inputBackground: #2D2E30;
+$textColorPrimary: #ffffff;
+$textColorSecondary: #7c7c7c;
+$textColorTertiary: #a1a1a1;
+$emergencyRed: #ff3e3e;
+$emergencyRedDark: #ff0000;
+
+// Login-specific styles
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.login-image {
+    flex: 1;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url("../images/login-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    color: $textColorPrimary;
+    position: relative;
+    
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        position: relative;
+        z-index: 5;
+        text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+    
+    p {
+        font-size: 1rem;
+        max-width: 80%;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 5;
+        text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+    
+    .map-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        background: none;
+        
+        h3 {
+            display: none; // Hide the title as we'll use the SVG title
+        }
+        
+        #trafficking-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .map-info {
+            display: none; // Hide default info text
+        }
+    }
+}
+
+.login-form {
+    flex: 1;
+    background-color: $backgroundDark;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: $cardBackground;
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    
+    img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    h2 {
+        color: $textColorPrimary;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    p {
+        color: $textColorSecondary;
+        font-size: 0.9rem;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    
+    label {
+        display: block;
+        color: $textColorTertiary;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        background-color: $inputBackground;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: $textColorPrimary;
+        font-family: 'IBM Plex Mono', monospace;
+        transition: all 0.3s ease;
+        
+        &:focus {
+            outline: none;
+            border-color: $purpleAccent;
+            box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.2);
+        }
+    }
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, $purpleAccent, $purpleAccentDark);
+    border: none;
+    border-radius: 8px;
+    color: $textColorPrimary;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: $textColorSecondary;
+    
+    a {
+        color: $purpleAccent;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            color: $purpleLight;
+            text-decoration: underline;
+        }
+    }
+}
+
+.emergency-button-login {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 10000;
+}
+
+.emergency-circle-login {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $emergencyRed, $emergencyRedDark);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: breathe 3s infinite ease-in-out;
+    
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+    }
+}
+
+.emergency-icon-login {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+@keyframes breathe {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 0, 0, 0.5);
+    }
+}
+
+// Map styling
+.map-container {
+    margin-top: 3rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    color: $textColorPrimary;
+    
+    h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: $textColorPrimary;
+        font-weight: 600;
+    }
+    
+    #trafficking-map {
+        width: 100%;
+        height: 240px;
+        overflow: hidden;
+    }
+    
+    .map-info {
+        font-size: 0.8rem;
+        margin-top: 10px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+.map-tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: $cardBackground;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    pointer-events: none;
+    font-size: 12px;
+    color: $textColorPrimary;
+    z-index: 1000;
+    max-width: 250px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    
+    strong {
+        color: $purpleLight;
+        font-weight: 600;
+    }
+}
+
+.country {
+    cursor: pointer;
+    transition: stroke 0.2s, stroke-width 0.2s;
+    
+    &:hover {
+        stroke: #ffcc00 !important;
+        stroke-width: 2px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+    
+    .login-image {
+        display: none;
+    }
+    
+    .login-form {
+        padding: 2rem 1rem;
+    }
+    
+    .login-image {
+        padding: 2rem;
+        min-height: 300px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+        .map-container {
+            display: none;
+        }
+    }
+}
+
+.form-group.focused label {
+    color: $purpleAccent;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    height: 100%;
+    width: 100%;
+    background-color: #141517;
+    overflow: hidden;
+}
+
+.fullscreen-map {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    #trafficking-map {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+}
+
+.login-form-centered {
+    position: relative;
+    z-index: 2; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background-color: $cardBackground;
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    
+    h2 {
+        color: $textColorPrimary;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: $textColorSecondary;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    
+    label {
+        display: block;
+        color: $textColorTertiary;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        background-color: $inputBackground;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: $textColorPrimary;
+        transition: all 0.3s ease;
+
+        &:focus {
+            outline: none;
+            border-color: $purpleAccent;
+            box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.2);
+        }
+    }
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, $purpleAccent, $purpleAccentDark);
+    border: none;
+    border-radius: 8px;
+    color: $textColorPrimary;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: $textColorSecondary;
+
+    a {
+        color: $purpleAccent;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: $purpleLight;
+            text-decoration: underline;
+        }
+    }
+}
+
+.map-tooltip {
+    position: absolute;
+    background-color: $cardBackground;
+    color: $textColorPrimary;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    max-width: 250px;
+    font-size: 12px;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    display: none;
+
+    strong {
+        color: $purpleLight;
+        font-weight: 600;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+
+.country {
+    cursor: pointer;
+    transition: stroke 0.2s, stroke-width 0.2s;
+
+    &:hover {
+        stroke: #ffcc00 !important;
+        stroke-width: 2px !important;
+    }
+}
+
+.emergency-button-login {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 10000;
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
