@@ -1,8 +1,8 @@
 let imageData = [
 ];
-for (let i = 0; i <= 25; i++) {
+for (let i = 0; i <= 28; i++) {
     imageData.push({
-        src: `${i}.jpg`,
+        src: `/static/images/${i}.jpg`,
     });
 }
 
